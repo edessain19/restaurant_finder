@@ -3,23 +3,24 @@ import requests
 import json
 
 class Result:
-	def __init__(self, name="", adress=[], rating="", image="", price=""):
+	def __init__(self, name, adress, rating, image, price):
 		self.name = name
 		self.adress = adress
 		self.rating = rating
 		self.image = image
 		self.price = price
 
-def request_api(max_dist, price):
+def request_api(adress, dist):
 	API_KEY = 'JbKrlhqKFr30qIUy08r90jmuBgzspw6VoCoTtDzwUZoxUmpZoJ6ZPzJAM45noL4tubTkII8deVCgc2Yxe-lfjltBuBcNTN5pR2vJu2h845WCz4ibXEuKnHLm3DwKYXYx'
 	ENDPOINT = 'https://api.yelp.com/v3/businesses/search'
 	HEADERS = {'Authorization': 'bearer %s' % API_KEY}
 	PARAMETERS = {'term': 'restaurants',
 				'limit': 10,
 				# 'offset': 50,
-				'price' : '$$'
-				'radius': 10000,
-				'location': 'Brussels'}
+				'price' : '$$',
+				'radius': dist,
+				'location': adress
+				}
 	response = requests.get(url = ENDPOINT,
 							params = PARAMETERS,
 							headers = HEADERS)
@@ -36,10 +37,10 @@ def check_businesses(data):
 
 def parse_api(data):
 	resto = check_businesses(data)
-	size = len(resto)
+	# size = len(resto)
 	lst = []
 	if (resto == -1):
-		return (print("error"))
+		return ("error")
 	for elem in resto:
 		name, adress, rating, image, price = "", [], 0, "", 0
 		for key, value in elem.items():
@@ -54,6 +55,7 @@ def parse_api(data):
 			if key == 'price':
 				price = len(value)
 		lst.append(Result(name, adress, rating, image, price))
+		return (lst)
 
 if __name__ == '__main__':
 	
