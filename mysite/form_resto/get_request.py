@@ -17,8 +17,8 @@ def request_api(adress, dist):
 	PARAMETERS = {'term': 'restaurants',
 				'limit': 10,
 				# 'offset': 50,
-				'price' : '$$',
-				'radius': dist,
+				# 'price' : '$$',
+				'radius': dist * 1000,
 				'location': adress
 				}
 	response = requests.get(url = ENDPOINT,
@@ -27,40 +27,6 @@ def request_api(adress, dist):
 	data = response.json()
 	return data
 
-def check_businesses(data):
-	if 'businesses' in data:
-		for key, value in data.items():
-			if key == 'businesses':
-				return (value)
-	else:
-		return (-1)
-
-def parse_api(data):
-	resto = check_businesses(data)
-	# size = len(resto)
-	lst = []
-	if (resto == -1):
-		return ("error")
-	for elem in resto:
-		name, adress, rating, image, price = "", [], 0, "", 0
-		for key, value in elem.items():
-			if key == 'name':
-				name = value
-			if key == 'display_adress':
-				adress = value
-			if key == 'rating':
-				rating = value
-			if key == 'image_url':
-				image = value
-			if key == 'price':
-				price = len(value)
-		lst.append(Result(name, adress, rating, image, price))
-		return (lst)
-
-if __name__ == '__main__':
-	
-	data = request_api()
-	parse_api(data)
 
 
 

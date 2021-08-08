@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="42">
     <title>Document</title>
 </head>
 <body>
@@ -18,13 +17,13 @@
         <th style="border: solid 2px" >Adress</th>
         <th style="border: solid 2px" >Rating</th>
         <th style="border: solid 2px" >price</th>
-        {% for class in result %}
+        {% for elem in result %}
             <tr>
-                <td>class.name</td>
-                <td>class.adress</td>
-                <td>class.rating</td>
-                <td>class.price</td>
-                <td>class.image</td>
+                <td style="border: solid 2px" >{{ elem.name }}</td>
+                <td style="border: solid 2px" >{{ elem.adress }}</td>
+                <td style="border: solid 2px" >{{ elem.rating }}</td>
+                <td style="border: solid 2px" >{{ elem.price }}</td>
+                <td style="border: solid 2px" > <img src="{{ elem.image }}" alt="picture of the restaurant" width="100" height="100"/></td>
             </tr>
         {% endfor %}
     </table>
