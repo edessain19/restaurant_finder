@@ -18,9 +18,14 @@ def request_create_view(request):
 					dist = value
 	data = request_api(adress, dist)
 	result_of_request = parse_api(data)
+	if result_of_request == "error":
+		check_result = -1
+	else :
+		check_result = 1
 	context = {
 		'form' : form,
 		'result' : result_of_request,
+		'check_result' : check_result
 	}
 	return render(request, "resto/form.html", context)
 
@@ -34,9 +39,9 @@ def check_businesses(data):
 
 def parse_api(data):
 	resto = check_businesses(data)
-	lst = []
 	if (resto == -1):
 		return ("error")
+	lst = []
 	for elem in resto:
 		name, adress, rating, image, price = "", "", 0, "", 0
 		for key, value in elem.items():

@@ -3,6 +3,14 @@ from django.forms import ModelForm
 from .models import Request
 
 
+# ATTENDEES_CHOICES =(
+#     ("1", "Gilles"),
+#     ("2", "Vince"),
+#     ("3", "Sam"),
+#     ("4", "Klaas"),
+#     ("5", "Gaelle"),
+# )
+
 class RequestForm(forms.ModelForm):
 	class Meta:
 		model = Request
@@ -16,4 +24,4 @@ class RequestForm(forms.ModelForm):
 # 	localisation = forms.CharField(max_length=200)
 # 	max_dist = forms.IntegerField()
 # 	price_range = forms.IntegerField()
-# 	attendees = forms.CharField(max_length=200)
+# 	attendees = forms.MultipleChoiceField(choices = ATTENDEES_CHOICES)

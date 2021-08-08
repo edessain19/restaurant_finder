@@ -12,11 +12,13 @@
         <input type="submit" value='save'>
     </form>
 
+	{% if check_result == 1 %}
     <table style="float: left">
         <th style="border: solid 2px" >Name</th>
         <th style="border: solid 2px" >Adress</th>
         <th style="border: solid 2px" >Rating</th>
-        <th style="border: solid 2px" >price</th>
+        <th style="border: solid 2px" >Price</th>
+		<th style="border: solid 2px" >Picture</th>
         {% for elem in result %}
             <tr>
                 <td style="border: solid 2px" >{{ elem.name }}</td>
@@ -27,5 +29,9 @@
             </tr>
         {% endfor %}
     </table>
+
+	{% else %}
+		<p> Error : Invalide request</p>
+	{% endif %}
 </body>
 </html>
