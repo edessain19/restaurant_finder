@@ -2,17 +2,21 @@ from django.db import models
 
 # Create your models here.
 
-ATTENDEES_CHOICES =(
-    ("1", "Gilles"),
-    ("2", "Vince"),
-    ("3", "Sam"),
-    ("4", "Klaas"),
-    ("5", "Gaelle"),
-)
+
+
+def validate_distance(value):
+    if value < 0 or value > 45:
+        raise ValidationError(
+            _('Insert a value smaller than 45 km'),
+            params={'value': value},
+        )
 
 class Request(models.Model):
 	localisation = models.CharField(max_length=200)
-	max_dist = models.IntegerField()
-	price_range = models.IntegerField()
-	attendees = models.MultiSelectField(choices = ATTENDEES_CHOICES)
-	# food
+	max_dist = models.IntegerField(validators=[validate_distance])
+	price = models.CharField(max_length=1, choices=[1,2,3,4,5])
+	Gilles = models.BooleanField()
+	Vince = models.BooleanField()
+	Sam = models.BooleanField()
+	Klaas = models.BooleanField()
+	Gaelle = models.BooleanField()

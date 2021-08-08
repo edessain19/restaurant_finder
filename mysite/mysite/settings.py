@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'form_resto',
-	'multiselectfield',
 ]
 
 MIDDLEWARE = [

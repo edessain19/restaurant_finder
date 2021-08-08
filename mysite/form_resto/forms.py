@@ -16,8 +16,12 @@ class RequestForm(forms.ModelForm):
 		model = Request
 		fields = ['localisation', 
 				'max_dist', 
-				'price_range', 
-				'attendees',
+				'price', 
+				'Gilles',
+				'Vince',
+				'Sam',
+				'Klaas',
+				'Gaelle',
 			]
 
 # class RequestForm(forms.Form):
