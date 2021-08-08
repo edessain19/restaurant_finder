@@ -5,18 +5,52 @@ from .get_request import *
 
 # Create your views here.
 
+def parsing_value(form):
+	adress, dist, price, food = "", 0, 0, {"italian" : 0, "lebanese" : 0, "japanese" : 0, "belgian" : 0}
+	for key, value in form.cleaned_data.items():
+		if key == 'localisation':
+			adress = value
+		if key == "max_dist":
+			dist = value
+		if key == "price":
+			price = value
+		if key == "Gilles":
+			if value == True:
+				food["italian"] += 1 
+				food["lebanese"] += 1
+				food["japanese"] += 1
+				food["belgian"] += 1
+		if key == "Vince":
+			if value == True:
+				food["italian"] += 1
+				food["lebanese"] += 1
+				food["japanese"] += 1
+		if key == "Sam":
+			if value == True:
+				food["belgian"] += 1
+		if key == "Klaas":
+			if value == True:
+				food["japanese"] += 1
+				food["belgian"] += 1
+		if key == "Gaelle":
+			if value == True:
+				food["lebanese"] += 1
+				food["japanese"] += 1
+	type_of_food = ""
+	max_value = max(food.values())
+	for k,v in food.items(): 
+		if v == max_value:
+			type_of_food = type_of_food + "," + k
+	return (adress, dist, price, type_of_food[1:])
+
 def request_create_view(request):
+	adress, dist, price, food = "", 0, 0, ""
 	form = RequestForm()
-	adress, dist = "", 0
 	if request.method == 'POST':
 		form = RequestForm(request.POST)
 		if form.is_valid():
-			for key, value in form.cleaned_data.items():
-				if key == 'localisation':
-					adress = value
-				if key == "max_dist":
-					dist = value
-	data = request_api(adress, dist)
+			adress, dist, price, food = parsing_value(form)
+	data = request_api(adress, dist, price, food)
 	result_of_request = parse_api(data)
 	if result_of_request == "error":
 		check_result = -1
@@ -43,18 +77,18 @@ def parse_api(data):
 		return ("error")
 	lst = []
 	for elem in resto:
-		name, adress, rating, image, price = "", "", 0, "", 0
+		name, address, rating, image, price = "", "", 0, "", 0
 		for key, value in elem.items():
 			if key == 'name':
 				name = value
-			if key == 'display_adress':
-				adress = value
+			if key == 'location':
+				address = value['address1'] + ' - ' + value['zip_code'] + ' ' + value['city'] + ', ' + value['country']
 			if key == 'rating':
 				rating = value
 			if key == 'image_url':
 				image = value
 			if key == 'price':
-				price = len(value)
-		tmp = Result(name, adress, rating, image, price)
+				price = value
+		tmp = Result(name, address, rating, image, price)
 		lst.append(tmp)
 	return (lst)

@@ -10,16 +10,16 @@ class Result:
 		self.image = image
 		self.price = price
 
-def request_api(adress, dist):
+def request_api(adress, dist, price, food):
 	API_KEY = 'JbKrlhqKFr30qIUy08r90jmuBgzspw6VoCoTtDzwUZoxUmpZoJ6ZPzJAM45noL4tubTkII8deVCgc2Yxe-lfjltBuBcNTN5pR2vJu2h845WCz4ibXEuKnHLm3DwKYXYx'
 	ENDPOINT = 'https://api.yelp.com/v3/businesses/search'
 	HEADERS = {'Authorization': 'bearer %s' % API_KEY}
 	PARAMETERS = {'term': 'restaurants',
 				'limit': 10,
-				# 'offset': 50,
-				# 'price' : '$$',
+				'price' : price,
 				'radius': dist * 1000,
-				'location': adress
+				'location': adress,
+				'categories': food,
 				}
 	response = requests.get(url = ENDPOINT,
 							params = PARAMETERS,

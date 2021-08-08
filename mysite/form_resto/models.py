@@ -2,19 +2,17 @@ from django.db import models
 
 # Create your models here.
 
-
-
-def validate_distance(value):
-    if value < 0 or value > 45:
-        raise ValidationError(
-            _('Insert a value smaller than 45 km'),
-            params={'value': value},
-        )
+PRICE_RANGE =(
+    ("1", "less than 10€"),
+    ("2", "between 11€ and 30€"),
+    ("3", "between 31€ and 60€"),
+    ("4", "over 61€"),
+)
 
 class Request(models.Model):
 	localisation = models.CharField(max_length=200)
-	max_dist = models.IntegerField(validators=[validate_distance])
-	price = models.CharField(max_length=1, choices=[1,2,3,4,5])
+	max_dist = models.IntegerField()
+	price = models.CharField(max_length=1, choices=PRICE_RANGE)
 	Gilles = models.BooleanField()
 	Vince = models.BooleanField()
 	Sam = models.BooleanField()
