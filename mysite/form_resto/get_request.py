@@ -1,17 +1,9 @@
 
 import requests
 import json
-
-class Result:
-	def __init__(self, name, adress, rating, image, price):
-		self.name = name
-		self.adress = adress
-		self.rating = rating
-		self.image = image
-		self.price = price
+from mysite.settings import API_KEY
 
 def request_api(adress, dist, price, food, limit):
-	API_KEY = 'JbKrlhqKFr30qIUy08r90jmuBgzspw6VoCoTtDzwUZoxUmpZoJ6ZPzJAM45noL4tubTkII8deVCgc2Yxe-lfjltBuBcNTN5pR2vJu2h845WCz4ibXEuKnHLm3DwKYXYx'
 	ENDPOINT = 'https://api.yelp.com/v3/businesses/search'
 	HEADERS = {'Authorization': 'bearer %s' % API_KEY}
 	PARAMETERS = {'term': 'restaurants',

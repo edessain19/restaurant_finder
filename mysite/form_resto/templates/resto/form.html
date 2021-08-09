@@ -4,33 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>Lizy</title>
 </head>
 <body>
-<div class="navbar">
+<div>
     <h1>Lizy - Are you looking for a restaurant?</h1>
-
 </div>
-<div >
-    <form action="" method='POST' style="border: solid 2px, "> {% csrf_token %}
+<div>
+    <form action="" method='POST' class="form"> {% csrf_token %}
             {{ form.as_p }}
         <input type="submit" value='save'>
     </form>
 </div>
+<div style="text-align: center">
 	{% if check_result == 1 %}
-    <table style="float: left">
-        <th style="border: solid 2px" >Name</th>
-        <th style="border: solid 2px" >Adress</th>
-        <th style="border: solid 2px" >Rating</th>
-        <th style="border: solid 2px" >Price</th>
-		<th style="border: solid 2px" >Picture</th>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th scope="col" >Name</th>
+            <th scope="col" >Adress</th>
+            <th scope="col" >Rating</th>
+            <th scope="col" >Price</th>
+		    <th scope="col" >Picture</th>
+        </thead>
         {% for elem in result %}
             <tr>
-                <td style="border: solid 2px" >{{ elem.name }}</td>
-                <td style="border: solid 2px" >{{ elem.adress }}</td>
-                <td style="border: solid 2px" >{{ elem.rating }}</td>
-                <td style="border: solid 2px" >{{ elem.price }}</td>
-                <td style="border: solid 2px" > <img src="{{ elem.image }}" alt="picture of the restaurant" width="100" height="100"/></td>
+                <th style="color: black" scope="row"><a href="{{ elem.link }}">{{ elem.name }}</a></th>
+                <td>{{ elem.adress }}</td>
+                <td>{{ elem.rating }}</td>
+                <td>{{ elem.price }}</td>
+                <td> <img src="{{ elem.image }}" alt="picture of the restaurant" width="100" height="100"/></td>
             </tr>
         {% endfor %}
     </table>
@@ -40,5 +44,6 @@
 	{% else %}
 		<p>Enter your request</p>
 	{% endif %}
+</div>
 </body>
 </html>

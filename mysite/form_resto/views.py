@@ -5,6 +5,15 @@ from .get_request import *
 
 # Create your views here.
 
+class Result:
+	def __init__(self, name, adress, rating, image, price, link):
+		self.name = name
+		self.adress = adress
+		self.rating = rating
+		self.image = image
+		self.price = price
+		self.link = link
+
 def request_create_view(request):
 	check_result = 0
 	result_of_request = []
@@ -15,7 +24,7 @@ def request_create_view(request):
 		form = RequestForm(request.POST)
 		if form.is_valid():
 			adress, dist, price, food = parsing_value(form)
-			form = RequestForm()
+			# form = RequestForm()
 		data = request_api(adress, dist, price, food, 10)
 		if data == "error":
 			check_result = -1
@@ -47,7 +56,7 @@ def parse_api(data):
 		return ("error")
 	lst = []
 	for elem in resto:
-		name, address, rating, image, price = "", "", 0, "", 0
+		name, address, rating, image, price, link = "", "", 0, "", 0, ""
 		for key, value in elem.items():
 			if key == 'name':
 				name = value
@@ -59,7 +68,9 @@ def parse_api(data):
 				image = value
 			if key == 'price':
 				price = value
-		tmp = Result(name, address, rating, image, price)
+			if key == 'url':
+				link = value
+		tmp = Result(name, address, rating, image, price, link)
 		lst.append(tmp)
 	return (lst)
 
