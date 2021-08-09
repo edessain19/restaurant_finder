@@ -13,7 +13,7 @@
     <h1 style="text-align: center; color : #FF2746; margin-bottom: 50px;">Lizy - Are you looking for a restaurant?</h1>
 </div>
 <div>
-    <form style="border: solid 2px; margin-right: 40%; margin-left: 40%; margin-bottom: 40px;" action="" method='POST' class="form"> {% csrf_token %}
+    <form style="border: solid 2px; padding: 20px; margin-right: 40%; margin-left: 40%; margin-bottom: 40px;" action="" method='POST' class="form"> {% csrf_token %}
             {{ form.as_p }}
         <input type="submit" value='save'>
     </form>
