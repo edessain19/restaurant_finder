@@ -12,7 +12,7 @@ def request_api(adress, dist, price, lang, food, limit):
 				'radius': dist * 1000,
 				'location': adress,
 				'categories': food,
-				'locale' : lang,
+				'local' : lang,
 				}
 	response = requests.get(url = ENDPOINT,
 							params = PARAMETERS,
@@ -35,6 +35,7 @@ def parsing_value(form):
 			price = value
 		if key == "language_of_query":
 			lang = value + "_BE"
+			print(lang)
 		if key == "Gilles":
 			if value == True:
 				food["italian"] += 1

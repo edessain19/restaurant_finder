@@ -24,7 +24,7 @@ def request_create_view(request):
 		form = RequestForm(request.POST)
 		if form.is_valid():
 			adress, dist, price, lang, food = parsing_value(form)
-			# form = RequestForm()
+			print(adress, dist, lang)
 		data = request_api(adress, dist, price, lang, food, 10)
 		if data == "error":
 			check_result = -1
