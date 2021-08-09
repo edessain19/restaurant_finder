@@ -17,22 +17,22 @@ class Result:
 def request_create_view(request):
 	check_result = 0
 	result_of_request = []
-	adress, dist, price, food = "", 0, 0, ""
+	adress, dist, price, lang, food = "", 0, 0, "", ""
 	
 	form = RequestForm()
 	if request.method == 'POST':
 		form = RequestForm(request.POST)
 		if form.is_valid():
-			adress, dist, price, food = parsing_value(form)
+			adress, dist, price, lang, food = parsing_value(form)
 			# form = RequestForm()
-		data = request_api(adress, dist, price, food, 10)
+		data = request_api(adress, dist, price, lang, food, 10)
 		if data == "error":
 			check_result = -1
 		else :
 			check_result = 1
 		result_of_request = parse_api(data)
 		if len(result_of_request) < 10 and check_result == 1:
-			data_2 = request_api(adress, dist * 2, price, 'all', 10 - len(result_of_request))
+			data_2 = request_api(adress, dist * 2, price, lang, 'all', 10 - len(result_of_request))
 			result_of_request_2 = parse_api(data_2)
 			result_of_request = result_of_request + result_of_request_2
 	context = {

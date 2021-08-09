@@ -5,7 +5,8 @@ from .models import Request
 class RequestForm(forms.ModelForm):
 	class Meta:
 		model = Request
-		fields = ['localisation', 
+		fields = ['localisation',
+				'language_of_query',
 				'distance', 
 				'price', 
 				'Gilles',

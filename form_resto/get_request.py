@@ -3,7 +3,7 @@ import requests
 import json
 from mysite.settings import API_KEY
 
-def request_api(adress, dist, price, food, limit):
+def request_api(adress, dist, price, lang, food, limit):
 	ENDPOINT = 'https://api.yelp.com/v3/businesses/search'
 	HEADERS = {'Authorization': 'bearer %s' % API_KEY}
 	PARAMETERS = {'term': 'restaurants',
@@ -12,6 +12,7 @@ def request_api(adress, dist, price, food, limit):
 				'radius': dist * 1000,
 				'location': adress,
 				'categories': food,
+				'locale' : lang,
 				}
 	response = requests.get(url = ENDPOINT,
 							params = PARAMETERS,
@@ -20,11 +21,11 @@ def request_api(adress, dist, price, food, limit):
 	return data
 
 def parsing_value(form):
-	adress, dist, price, food = "", 0, 0, {"italian" : 0, "lebanese" : 0, "japanese" : 0, "belgian" : 0}
+	adress, dist, price, lang, food = "", 0, 0, "", {"italian" : 0, "lebanese" : 0, "japanese" : 0, "belgian" : 0}
 	for key, value in form.cleaned_data.items():
 		if key == 'localisation':
 			adress = value
-		if key == "max_dist":
+		if key == "distance":
 			dist = value
 			if dist > 45:
 				dist = 45
@@ -32,6 +33,8 @@ def parsing_value(form):
 				dist = 1
 		if key == "price":
 			price = value
+		if key == "language_of_query":
+			lang = value + "_BE"
 		if key == "Gilles":
 			if value == True:
 				food["italian"] += 1
@@ -59,7 +62,7 @@ def parsing_value(form):
 	for k,v in food.items(): 
 		if v == max_value:
 			type_of_food = type_of_food + "," + k
-	return (adress, dist, price, type_of_food[1:])
+	return (adress, dist, price, lang, type_of_food[1:])
 
 
 
