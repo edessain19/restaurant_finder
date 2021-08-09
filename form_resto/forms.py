@@ -6,9 +6,9 @@ class RequestForm(forms.ModelForm):
 	class Meta:
 		model = Request
 		fields = ['localisation',
-				'language_of_query',
 				'distance', 
 				'price', 
+				'language_of_query',
 				'Gilles',
 				'Vince',
 				'Sam',
