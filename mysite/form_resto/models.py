@@ -11,7 +11,7 @@ PRICE_RANGE =(
 
 class Request(models.Model):
 	localisation = models.CharField(max_length=200)
-	max_dist = models.IntegerField()
+	maximum_distance = models.IntegerField()
 	price = models.CharField(max_length=1, choices=PRICE_RANGE)
 	Gilles = models.BooleanField()
 	Vince = models.BooleanField()

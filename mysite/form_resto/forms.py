@@ -6,7 +6,7 @@ class RequestForm(forms.ModelForm):
 	class Meta:
 		model = Request
 		fields = ['localisation', 
-				'max_dist', 
+				'maximum_distance', 
 				'price', 
 				'Gilles',
 				'Vince',

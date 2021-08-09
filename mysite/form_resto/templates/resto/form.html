@@ -6,12 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-
-    <form action="" method='POST'> {% csrf_token %}
+<div >
+    <form action="" method='POST' style="border: solid 2px, "> {% csrf_token %}
             {{ form.as_p }}
         <input type="submit" value='save'>
     </form>
-
+</div>
 	{% if check_result == 1 %}
     <table style="float: left">
         <th style="border: solid 2px" >Name</th>
@@ -30,8 +30,10 @@
         {% endfor %}
     </table>
 
-	{% else %}
+	{% elif check_result == -1 %}
 		<p> Error : Invalide request</p>
+	{% else %}
+		<p>Enter your request</p>
 	{% endif %}
 </body>
 </html>
