@@ -8,7 +8,7 @@ class RequestForm(forms.ModelForm):
 		fields = ['localisation',
 				'distance', 
 				'price', 
-				'language_of_query',
+				'Language_of_the_request',
 				'Gilles',
 				'Vince',
 				'Sam',
