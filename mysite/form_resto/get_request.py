@@ -34,7 +34,7 @@ def parsing_value(form):
 			price = value
 		if key == "Gilles":
 			if value == True:
-				food["italian"] += 1 
+				food["italian"] += 1
 				food["lebanese"] += 1
 				food["japanese"] += 1
 				food["belgian"] += 1
