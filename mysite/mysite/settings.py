@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@ohi^x!0$!d#k)j7(7ttuzb(8u6si^5^e%d0bwdt%$52xa$d5h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lizy-restaurant-finder.herokuapp.com']
 
 
 # Application definition
