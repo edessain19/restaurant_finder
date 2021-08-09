@@ -15,6 +15,7 @@ def request_create_view(request):
 		form = RequestForm(request.POST)
 		if form.is_valid():
 			adress, dist, price, food = parsing_value(form)
+			form = RequestForm()
 		data = request_api(adress, dist, price, food, 10)
 		if data == "error":
 			check_result = -1
@@ -62,40 +63,3 @@ def parse_api(data):
 		lst.append(tmp)
 	return (lst)
 
-def parsing_value(form):
-	adress, dist, price, food = "", 0, 0, {"italian" : 0, "lebanese" : 0, "japanese" : 0, "belgian" : 0}
-	for key, value in form.cleaned_data.items():
-		if key == 'localisation':
-			adress = value
-		if key == "max_dist":
-			dist = value
-		if key == "price":
-			price = value
-		if key == "Gilles":
-			if value == True:
-				food["italian"] += 1 
-				food["lebanese"] += 1
-				food["japanese"] += 1
-				food["belgian"] += 1
-		if key == "Vince":
-			if value == True:
-				food["italian"] += 1
-				food["lebanese"] += 1
-				food["japanese"] += 1
-		if key == "Sam":
-			if value == True:
-				food["belgian"] += 1
-		if key == "Klaas":
-			if value == True:
-				food["japanese"] += 1
-				food["belgian"] += 1
-		if key == "Gaelle":
-			if value == True:
-				food["lebanese"] += 1
-				food["japanese"] += 1
-	type_of_food = ""
-	max_value = max(food.values())
-	for k,v in food.items(): 
-		if v == max_value:
-			type_of_food = type_of_food + "," + k
-	return (adress, dist, price, type_of_food[1:])

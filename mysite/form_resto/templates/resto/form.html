@@ -1,11 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lizy</title>
 </head>
 <body>
+<div class="navbar">
+    <h1>Lizy - Are you looking for a restaurant?</h1>
+
+</div>
 <div >
     <form action="" method='POST' style="border: solid 2px, "> {% csrf_token %}
             {{ form.as_p }}
