@@ -135,5 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # env = environ.Env()
 # environ.Env.read_env()
 
-API_KEY = os.getenv('APY_KEY')
-django_heroku.settings(locals())
+API_KEY = os.getenv('API_KEY')
+# django_heroku.settings(locals())
