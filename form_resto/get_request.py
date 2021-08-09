@@ -35,6 +35,7 @@ def parsing_value(form):
 			price = value
 		if key == "language_of_query":
 			lang = value + "_BE"
+			print(lang)
 		if key == "Gilles":
 			if value == True:
 				food["italian"] += 1
